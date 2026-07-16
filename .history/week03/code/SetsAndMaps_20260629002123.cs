@@ -3,9 +3,9 @@ using System.Text.Json;
 public static class SetsAndMaps
 {
     /// <summary>
-    /// The words parameter contains a list of two character
-    /// words (lower case, no duplicates). Using sets, find an O(n)
-    /// solution for returning all symmetric pairs of words.
+    /// The words parameter contains a list of two character 
+    /// words (lower case, no duplicates). Using sets, find an O(n) 
+    /// solution for returning all symmetric pairs of words.  
     ///
     /// For example, if words was: [am, at, ma, if, fi], we would return :
     ///
@@ -20,33 +20,16 @@ public static class SetsAndMaps
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
-{
-    var seen = new HashSet<string>();
-    var pairs = new List<string>();
-
-    foreach (var word in words)
     {
-        // Ignore words with identical characters (e.g., "aa")
-        if (word[0] == word[1])
-            continue;
-
-        string reverse = new string([word[1], word[0]]);
-
-        if (seen.Contains(reverse))
-        {
-            pairs.Add($"{word} & {reverse}");
-        }
-
-        seen.Add(word);
+        // TODO Problem 1 - ADD YOUR CODE HERE
+        return [];
     }
 
-    return pairs.ToArray();
-}
     /// <summary>
     /// Read a census file and summarize the degrees (education)
     /// earned by those contained in the file.  The summary
     /// should be stored in a dictionary where the key is the
-    /// degree earned and the value is the number of people that
+    /// degree earned and the value is the number of people that 
     /// have earned that degree.  The degree information is in
     /// the 4th column of the file.  There is no header row in the
     /// file.
@@ -56,20 +39,10 @@ public static class SetsAndMaps
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
-
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            var degree = fields[3].Trim();
-
-            if (degrees.ContainsKey(degree))
-            {
-                degrees[degree]++;
-            }
-            else
-            {
-                degrees[degree] = 1;
-            }
+            // TODO Problem 2 - ADD YOUR CODE HERE
         }
 
         return degrees;
@@ -77,65 +50,39 @@ public static class SetsAndMaps
 
     /// <summary>
     /// Determine if 'word1' and 'word2' are anagrams.  An anagram
-    /// is when the same letters in a word are re-organized into a
+    /// is when the same letters in a word are re-organized into a 
     /// new word.  A dictionary is used to solve the problem.
-    ///
+    /// 
     /// Examples:
     /// is_anagram("CAT","ACT") would return true
     /// is_anagram("DOG","GOOD") would return false because GOOD has 2 O's
-    ///
+    /// 
     /// Important Note: When determining if two words are anagrams, you
-    /// should ignore any spaces.  You should also ignore cases.  For
+    /// should ignore any spaces.  You should also ignore cases.  For 
     /// example, 'Ab' and 'Ba' should be considered anagrams
-    ///
-    /// Reminder: You can access a letter by index in a string by
+    /// 
+    /// Reminder: You can access a letter by index in a string by 
     /// using the [] notation.
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        word1 = word1.Replace(" ", "").ToLower();
-        word2 = word2.Replace(" ", "").ToLower();
-
-        if (word1.Length != word2.Length)
-            return false;
-
-        var letters = new Dictionary<char, int>();
-
-        foreach (char c in word1)
-        {
-            if (letters.ContainsKey(c))
-                letters[c]++;
-            else
-                letters[c] = 1;
-        }
-
-        foreach (char c in word2)
-        {
-            if (!letters.ContainsKey(c))
-                return false;
-
-            letters[c]--;
-
-            if (letters[c] == 0)
-                letters.Remove(c);
-        }
-
-        return letters.Count == 0;
+        // TODO Problem 3 - ADD YOUR CODE HERE
+        return false;
     }
 
     /// <summary>
-    /// This function will read JSON (Javascript Object Notation) data from the
+    /// This function will read JSON (Javascript Object Notation) data from the 
     /// United States Geological Service (USGS) consisting of earthquake data.
     /// The data will include all earthquakes in the current day.
-    ///
+    /// 
     /// JSON data is organized into a dictionary. After reading the data using
     /// the built-in HTTP client library, this function will return a list of all
     /// earthquake locations ('place' attribute) and magnitudes ('mag' attribute).
-    /// Additional information about the format of the JSON data can be found
-    /// at this website:
-    ///
+    /// Additional information about the format of the JSON data can be found 
+    /// at this website:  
+    /// 
     /// https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
-    ///
+    /// 
     /// </summary>
     public static string[] EarthquakeDailySummary()
     {
@@ -149,13 +96,11 @@ public static class SetsAndMaps
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
-        var results = new List<string>();
-
-        foreach (var feature in featureCollection.Features)
-        {
-            results.Add($"{feature.Properties.Place} - Mag {feature.Properties.Mag}");
-        }
-
-        return results.ToArray();
+        // TODO Problem 5:
+        // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
+        // on those classes so that the call to Deserialize above works properly.
+        // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
+        // 3. Return an array of these string descriptions.
+        return [];
     }
 }

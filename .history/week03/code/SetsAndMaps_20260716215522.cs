@@ -20,28 +20,28 @@ public static class SetsAndMaps
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
-{
-    var seen = new HashSet<string>();
-    var pairs = new List<string>();
-
-    foreach (var word in words)
     {
-        // Ignore words with identical characters (e.g., "aa")
-        if (word[0] == word[1])
-            continue;
+        var seen = new HashSet<string>();
+        var pairs = new List<string>();
 
-        string reverse = new string([word[1], word[0]]);
-
-        if (seen.Contains(reverse))
+        foreach (var word in words)
         {
-            pairs.Add($"{word} & {reverse}");
+            if (word[0] == word[1])
+                continue;
+
+            var reverse = $"{word[1]}{word[0]}";
+
+            if (seen.Contains(reverse))
+            {
+                pairs.Add($"{word} & {reverse}");
+            }
+
+            seen.Add(word);
         }
 
-        seen.Add(word);
+        return pairs.ToArray();
     }
 
-    return pairs.ToArray();
-}
     /// <summary>
     /// Read a census file and summarize the degrees (education)
     /// earned by those contained in the file.  The summary
